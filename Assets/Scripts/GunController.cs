@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour {
 	private int maxBullets = 150;
 	public GameObject bulletSpawn1;
 	public GameObject bulletSpawn2;
+	private float cooldown = 0f;
 
 
 	private float prevAim;
@@ -26,7 +27,7 @@ public class GunController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		cooldown -= Time.deltaTime;
 		prevAim = aim;
 		aim = Input.GetAxis ("Aim");
 		if (Mathf.Abs (aim) == 1 && (prevAim == 0 || prevAim == aim) && (Mathf.Abs (transform.eulerAngles.y) < 230 && Mathf.Abs (transform.eulerAngles.y) > 130)) {
@@ -36,15 +37,18 @@ public class GunController : MonoBehaviour {
 		} else if (Mathf.Abs (transform.eulerAngles.y) <= 130) {
 			transform.rotation = Quaternion.Euler (0, 131,0);
 		}
-		if (Input.GetAxis ("P2 Fire") >= .9) {
+		if (Input.GetAxis ("P2 Fire") >= .9 && cooldown <= 0) {
 			if (bulletNum % 2 == 0) {
+				bulletPool [bulletNum % maxBullets].GetComponent<Rigidbody>().velocity = new Vector3 (0, 0, 0);
 				bulletPool [bulletNum % maxBullets].transform.position = bulletSpawn1.transform.position;
 				bulletPool [bulletNum % maxBullets].transform.rotation = bulletSpawn1.transform.rotation;
 			} else {
+				bulletPool [bulletNum % maxBullets].GetComponent<Rigidbody>().velocity = new Vector3 (0, 0, 0);
 				bulletPool [bulletNum % maxBullets].transform.position = bulletSpawn2.transform.position;
 				bulletPool [bulletNum % maxBullets].transform.rotation = bulletSpawn2.transform.rotation;
 			}
 			bulletNum++;
+			cooldown = .3f;
 		}
 
 	}
