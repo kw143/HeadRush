@@ -46,14 +46,14 @@ public class VehicleDriveController : MonoBehaviour {
 			rb.AddForce (transform.forward * throttle * speed * 400 * Time.deltaTime);
 		}
 	}
-	protected void MoveHorizontal (float speed, float correction, float previousSteer) {
+	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning) {
 		if (Mathf.Abs (correction) > .1 && (previousSteer == 0 || previousSteer == correction)) {
 			rb.AddForce (transform.right * correction * speed * 150 * Time.deltaTime);
 			if (transform.rotation.z < Quaternion.Euler (0, 0, 7).z && transform.rotation.z > Quaternion.Euler (0, 0, -7).z && rotationProgress >= 0 && rotationProgress < 1) { 
 				rotationProgress += Time.deltaTime;
 				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, correction * -7), rotationProgress);
 			}
-		} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0) {
+		} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0 && !turning) {
 			correctionProgress += Time.deltaTime;
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, 0), correctionProgress);
 		} else if (correctionProgress >= 1) {
