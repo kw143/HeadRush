@@ -8,8 +8,12 @@ public class GunController : MonoBehaviour {
 	private GameObject[] bulletPool;
 	private int bulletNum = 0;
 	private int maxBullets = 150;
+
+	public GameObject vehicle;
 	public GameObject bulletSpawn1;
+
 	public GameObject bulletSpawn2;
+
 	private float cooldown = 0f;
 	public GameObject gmHolder;
 	private GameManager gm;
@@ -17,6 +21,7 @@ public class GunController : MonoBehaviour {
 	private float prevAim;
 	// Use this for initialization
 	void Start () {
+
 		gm = gmHolder.GetComponent<GameManager> ();
 		bulletPool = new GameObject[maxBullets];
 		for (int i = 0; i < maxBullets; i++) {
@@ -38,12 +43,12 @@ public class GunController : MonoBehaviour {
 		} else {
 			aim = 0;
 		}
-		if (Mathf.Abs (aim) == 1 && (prevAim == 0 || prevAim == aim) && (Mathf.Abs (transform.eulerAngles.y) < 230 && Mathf.Abs (transform.eulerAngles.y) > 130)) {
+		if (Mathf.Abs (aim) == 1 && (prevAim == 0 || prevAim == aim) && (Mathf.Abs (transform.eulerAngles.y) < 250 && Mathf.Abs (transform.eulerAngles.y) > 110)) {
 			transform.Rotate (transform.up * Time.deltaTime * aim * 50);
-		} else if (Mathf.Abs (transform.eulerAngles.y) >= 230) {
-			transform.rotation = Quaternion.Euler (0, 229,0);
-		} else if (Mathf.Abs (transform.eulerAngles.y) <= 130) {
-			transform.rotation = Quaternion.Euler (0, 131,0);
+		} else if (Mathf.Abs (transform.eulerAngles.y) >= 250) {
+			transform.rotation = Quaternion.Euler (vehicle.transform.rotation.x, vehicle.transform.rotation.y - 111, transform.rotation.z);
+		} else if (Mathf.Abs (transform.eulerAngles.y) <= 110) {
+			transform.rotation = Quaternion.Euler (transform.rotation.x, transform.rotation.y + 111, transform.rotation.z);
 		}
 		if ((Input.GetAxis ("P2 Fire") >= .9 || Input.GetKey (KeyCode.UpArrow)) && cooldown <= 0) {
 			if (bulletNum % 2 == 0) {

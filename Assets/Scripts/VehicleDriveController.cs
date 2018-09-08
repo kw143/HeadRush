@@ -7,6 +7,8 @@ public class VehicleDriveController : MonoBehaviour {
 	private float rotationProgress = 0f;
 	private Rigidbody rb;
 	private float health;
+	public float curXVel;
+
 
 	public Rigidbody Rb {
 		get {
@@ -25,7 +27,7 @@ public class VehicleDriveController : MonoBehaviour {
 			health = value;
 		}
 	}
-
+		
 	//private  playerVehicle;
 	// Use this for initialization
 	void Start () {
@@ -34,6 +36,7 @@ public class VehicleDriveController : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
+		curXVel = rb.velocity.x;
 		if (Health <= 0) {
 			Destroy (this.gameObject);
 		}
@@ -41,21 +44,21 @@ public class VehicleDriveController : MonoBehaviour {
 
 	protected void MoveZDir (float speed, float throttle) {
 		if (throttle > .1 && rb.velocity.z < 20 * speed) {
-			rb.AddForce (transform.forward * throttle * speed * 250 * Time.deltaTime); 
+			rb.AddForce (transform.forward * throttle * speed * 2500 * Time.deltaTime); 
 		} else if (throttle < -.1 && rb.velocity.z > 5) {
-			rb.AddForce (transform.forward * throttle * speed * 400 * Time.deltaTime);
+			rb.AddForce (transform.forward * throttle * speed * 4000 * Time.deltaTime);
 		}
 	}
-	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning) {
-		if (Mathf.Abs (correction) > .1 && (previousSteer == 0 || previousSteer == correction)) {
-			rb.AddForce (transform.right * correction * speed * 150 * Time.deltaTime);
-			if (transform.rotation.z < Quaternion.Euler (0, 0, 7).z && transform.rotation.z > Quaternion.Euler (0, 0, -7).z && rotationProgress >= 0 && rotationProgress < 1) { 
+	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning, Quaternion curForward) {
+		if (Mathf.Abs (correction) > .8 && (previousSteer == 0 || previousSteer == correction) && !turning) {
+			rb.AddRelativeForce (transform.right * correction * speed * 1500 * Time.deltaTime);
+			if (transform.rotation.z < Quaternion.Euler (0, 0, 7).z && transform.rotation.z > Quaternion.Euler (0, 0, -7).z) { 
 				rotationProgress += Time.deltaTime;
-				transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, correction * -7), rotationProgress);
+				transform.RotateAround (transform.position, transform.forward, correction * -1);
 			}
 		} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0 && !turning) {
 			correctionProgress += Time.deltaTime;
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, 0), correctionProgress);
+			transform.rotation = Quaternion.Euler (new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0));
 		} else if (correctionProgress >= 1) {
 			correctionProgress = 0;
 		} else if (rotationProgress != 0) {
@@ -72,7 +75,7 @@ public class VehicleDriveController : MonoBehaviour {
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
 			this.health = 0;
-		}
+		} 
 	}
 
 
