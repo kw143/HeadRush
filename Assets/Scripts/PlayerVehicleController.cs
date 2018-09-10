@@ -46,10 +46,15 @@ public class PlayerVehicleController : VehicleDriveController {
 			} else if (Input.GetKey (KeyCode.S)) {
 				throttle = -1;
 			}
-			if (Input.GetKey (KeyCode.D)) {
-				correction = 1;
-			} else if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.Q)) {
 				correction = -1;
+			} else if (Input.GetKey (KeyCode.E)) {
+				correction = 1;
+			}
+			if (Input.GetKey (KeyCode.A)) {
+				turn = -1;
+			} else if (Input.GetKey (KeyCode.D)) {
+				turn = 1;
 			}
 		}
 		turning = Mathf.Abs (turn) > .1;
@@ -61,6 +66,7 @@ public class PlayerVehicleController : VehicleDriveController {
 
 		throttle = 0;
 		correction = 0;
+		turn = 0;
 	}
 
 	void TurnRotate (float turn, float speed) {
