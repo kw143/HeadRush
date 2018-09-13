@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVehicleController : VehicleDriveController {
-	public float speed = 10.0f;
+	public float speed = 20.0f;
 	private float previousSteer;
 	private float throttle = 0f;
 	private float correction = 0f;
@@ -29,7 +29,7 @@ public class PlayerVehicleController : VehicleDriveController {
 	new void Update () {
 		base.Update ();
 		if (speedTimer <= 0) {
-			speed = 10.0f;
+			speed = 20.0f;
 		} else {
 			speedTimer -= Time.deltaTime;
 		}

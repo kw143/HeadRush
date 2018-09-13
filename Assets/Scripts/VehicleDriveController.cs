@@ -68,8 +68,10 @@ public class VehicleDriveController : MonoBehaviour {
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "Bullet(Clone)") {
-			col.gameObject.transform.position = new Vector3 (-100000, 0, 0);
-			this.health -= col.gameObject.GetComponent<BulletBehavior> ().Damage;
+			if (this.gameObject.tag != "Player") {
+				col.gameObject.transform.position = new Vector3 (-100000, 0, 0);
+				this.health -= col.gameObject.GetComponent<BulletBehavior> ().Damage;
+			}
 		} else if (col.gameObject.tag == "Obstacle") {
 			this.health = 0;
 			Destroy (col.gameObject);

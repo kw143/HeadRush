@@ -18,6 +18,8 @@ public class GunController : MonoBehaviour {
 	public GameObject gmHolder;
 	private GameManager gm;
 
+	public float curRotation = 0f;
+	public float vehicleRotation = 0f;
 	private float prevAim;
 	// Use this for initialization
 	void Start () {
@@ -43,13 +45,31 @@ public class GunController : MonoBehaviour {
 		} else {
 			aim = 0;
 		}
-		if (Mathf.Abs (aim) == 1 && (prevAim == 0 || prevAim == aim) && (Mathf.Abs (transform.eulerAngles.y) < 250 && Mathf.Abs (transform.eulerAngles.y) > 110)) {
-			transform.Rotate (transform.up * Time.deltaTime * aim * 50);
-		} else if (Mathf.Abs (transform.eulerAngles.y) >= 250) {
-			transform.rotation = Quaternion.Euler (vehicle.transform.rotation.x, vehicle.transform.rotation.y - 111, transform.rotation.z);
-		} else if (Mathf.Abs (transform.eulerAngles.y) <= 110) {
-			transform.rotation = Quaternion.Euler (transform.rotation.x, transform.rotation.y + 111, transform.rotation.z);
+		vehicleRotation = vehicle.transform.eulerAngles.y;
+		curRotation = transform.eulerAngles.y - vehicleRotation;
+		if (curRotation < 0) {
+			curRotation += 360;
 		}
+		if (Mathf.Abs (aim) == 1 && (prevAim == 0 || prevAim == aim) 
+				&& ((curRotation >= 90 && curRotation <= 270)
+				||  (curRotation > 0))) {
+			if (curRotation <= 112 && curRotation >= 110) {
+				if (aim > 0) {
+					transform.Rotate (transform.up * Time.deltaTime * aim * 50);
+				}
+			} else if (curRotation <= 252 && curRotation >= 250) {
+				if (aim < 0) {
+					transform.Rotate (transform.up * Time.deltaTime * aim * 50);
+				}
+			} else {
+				transform.Rotate (transform.up * Time.deltaTime * aim * 50);
+			}
+
+		} /*else if (Mathf.Abs (transform.eulerAngles.y) >= vehicle.transform.eulerAngles.y + 250) {
+			transform.rotation = Quaternion.Euler (vehicle.transform.rotation.x, vehicle.transform.eulerAngles.y + 249, transform.rotation.z);
+		} else if (Mathf.Abs (transform.eulerAngles.y) <= vehicle.transform.eulerAngles.y + 90) {
+			transform.rotation = Quaternion.Euler (transform.rotation.x, vehicle.transform.eulerAngles.y + 91, transform.rotation.z);
+		}*/
 		if ((Input.GetAxis ("P2 Fire") >= .9 || Input.GetKey (KeyCode.UpArrow)) && cooldown <= 0) {
 			if (bulletNum % 2 == 0) {
 				bulletPool [bulletNum % maxBullets].GetComponent<Rigidbody>().velocity = new Vector3 (0, 0, 0);

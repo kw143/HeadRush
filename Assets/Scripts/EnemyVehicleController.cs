@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyVehicleController : VehicleDriveController {
 
-	private float speed = 9f;
+	private float speed = 19f;
 	private float correction;
 	private float startingHealth = 15f;
 	public GameObject player;

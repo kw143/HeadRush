@@ -26,4 +26,10 @@ public class BulletBehavior : MonoBehaviour {
 			rb.AddForce (transform.up * 100000 *Time.deltaTime);
 		}
 	}
+	void OnCollisionEnter (Collision col)
+	{
+		if (col.gameObject.tag == "Obstacle") {
+			Destroy (col.gameObject);
+		}
+	}
 }
