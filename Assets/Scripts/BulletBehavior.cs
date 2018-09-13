@@ -30,6 +30,8 @@ public class BulletBehavior : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Obstacle") {
 			Destroy (col.gameObject);
+		} else if (col.gameObject.tag == "Enemy") {
+			GameManager.addScore (5);
 		}
 	}
 }

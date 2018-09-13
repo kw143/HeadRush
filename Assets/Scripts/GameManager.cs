@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public bool Xbox_One_Controller;
 	private static float time = 0f;
+	private static int score = 0;
 	private Text Timer;
+	private Text Scoreboard;
 	// Use this for initialization
 	void Start () {
 		Timer = GameObject.Find ("Timer").GetComponent<Text>();
-
+		Scoreboard = GameObject.Find ("Scoreboard").GetComponent<Text> ();
 	}
 	
 	// Update is called once per frame
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour {
 		if (EditorSceneManager.GetActiveScene ().name == "Demo") {
 			UpdateTime ();
 		}
-
+		UpdateScore ();
 		string[] names = Input.GetJoystickNames();
 		for (int x = 0; x < names.Length; x++)
 		{
@@ -37,5 +39,12 @@ public class GameManager : MonoBehaviour {
 		int miliseconds = ((int)(time * 100)) % 100;
 		string format = minutes.ToString () + ":" + seconds.ToString () + "." + miliseconds.ToString ();
 		Timer.text = format;
+	}
+	void UpdateScore(){
+		Scoreboard.text = "Score: " + score.ToString ();
+	}
+
+	public static void addScore(int points) {
+		score += points;
 	}
 }
