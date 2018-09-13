@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyVehicleController : VehicleDriveController {
 
-	private float speed = 19f;
+	public float speed = 19f;
 	private float correction;
-	private float startingHealth = 15f;
+	private float startingHealth = 10f;
 	public GameObject player;
 	// Use this for initialization
 	void Start () {
