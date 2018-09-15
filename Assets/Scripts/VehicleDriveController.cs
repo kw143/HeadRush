@@ -7,7 +7,7 @@ public class VehicleDriveController : MonoBehaviour {
 	private float rotationProgress = 0f;
 	private Rigidbody rb;
 	private float health;
-	public float curXVel;
+	public float temp;
 
 
 	public Rigidbody Rb {
@@ -36,7 +36,7 @@ public class VehicleDriveController : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
-		curXVel = rb.velocity.x;
+		temp = Mathf.Abs (transform.eulerAngles.z);
 		if (Health <= 0) {
 			Destroy (this.gameObject);
 		}
@@ -49,10 +49,11 @@ public class VehicleDriveController : MonoBehaviour {
 			rb.AddForce (transform.forward * throttle * speed * 4000 * Time.deltaTime);
 		}
 	}
+
 	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning, Quaternion curForward) {
 		if (Mathf.Abs (correction) > .8 && (previousSteer == 0 || previousSteer == correction) && !turning) {
-			rb.AddRelativeForce (transform.right * correction * speed * 1500 * Time.deltaTime);
-			if (transform.rotation.z < Quaternion.Euler (0, 0, 7).z && transform.rotation.z > Quaternion.Euler (0, 0, -7).z) { 
+			rb.AddForce (transform.right * correction * speed * 1500 * Time.deltaTime);
+			if (rotationProgress < .39) { 
 				rotationProgress += Time.deltaTime;
 				transform.RotateAround (transform.position, transform.forward, correction * -1);
 			}
