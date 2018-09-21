@@ -7,9 +7,11 @@ public class VehicleDriveController : MonoBehaviour {
 	private float rotationProgress = 0f;
 	private Rigidbody rb;
 	private float health;
-	public float temp;
 
 
+	/*
+	 * Getter/Setter for the rigibody
+	 */ 
 	public Rigidbody Rb {
 		get {
 			return rb;
@@ -18,7 +20,9 @@ public class VehicleDriveController : MonoBehaviour {
 			rb = value;
 		}
 	}
-
+	/*
+	 * Getter/Setter for the Health
+	 */ 
 	public float Health {
 		get {
 			return health;
@@ -36,36 +40,63 @@ public class VehicleDriveController : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
-		temp = Mathf.Abs (transform.eulerAngles.z);
 		if (Health <= 0) {
 			Destroy (this.gameObject);
 		}
 	}
 
+	/*
+	 * This method it what adds the forward direction.
+	 * You cannot move unless the game state is set to movnig,
+	 * allowing for a start of game countdown
+	 * Speed is a constant associated with a type of vehicle
+	 * throttle is how hard the user is pushing forward
+	 */ 
 	protected void MoveZDir (float speed, float throttle) {
-		if (throttle > .1 && rb.velocity.z < 20 * speed) {
-			rb.AddForce (transform.forward * throttle * speed * 2500 * Time.deltaTime); 
-		} else if (throttle < -.1 && rb.velocity.z > 5) {
-			rb.AddForce (transform.forward * throttle * speed * 4000 * Time.deltaTime);
-		}
-	}
-
-	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning, Quaternion curForward) {
-		if (Mathf.Abs (correction) > .8 && (previousSteer == 0 || previousSteer == correction) && !turning) {
-			rb.AddForce (transform.right * correction * speed * 1500 * Time.deltaTime);
-			if (rotationProgress < .39) { 
-				rotationProgress += Time.deltaTime;
-				transform.RotateAround (transform.position, transform.forward, correction * -1);
+		if (StateManager.curState == 3) {
+			if (throttle > .1 && rb.velocity.z < 20 * speed) {
+				rb.AddForce (transform.forward * throttle * speed * 2500 * Time.deltaTime); 
+			} else if (throttle < -.1 && rb.velocity.z > 5) {
+				rb.AddForce (transform.forward * throttle * speed * 4000 * Time.deltaTime);
 			}
-		} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0 && !turning) {
-			correctionProgress += Time.deltaTime;
-			transform.rotation = Quaternion.Euler (new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0));
-		} else if (correctionProgress >= 1) {
-			correctionProgress = 0;
-		} else if (rotationProgress != 0) {
-			rotationProgress = 0;
 		}
 	}
+	/*
+	 * This method is what controls the side sweeping motion
+	 * While the key is held down, your vehicle banks and moves in
+	 * that direction.
+	 * After they are down banking, the vehicle rights itself
+	 * Speed is a constant associated with a type of vehicle
+	 * Correction is how much the player wants to move sideways
+	 * Previous steer what the player inputed last frame.
+	 * turning makes sure the player is not turning while banking
+	 * 
+	 */ 
+	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning) {
+		//making sure were in the correct state
+		if (StateManager.curState == 3) {
+			//solves issues of player banking getting stuck
+			if (Mathf.Abs (correction) > .8 && (previousSteer == 0 || previousSteer == correction) && !turning) {
+				rb.AddForce (transform.right * correction * speed * 1500 * Time.deltaTime);
+				if (rotationProgress < .39) { 
+					rotationProgress += Time.deltaTime;
+					transform.RotateAround (transform.position, transform.forward, correction * -1);
+				}
+			} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0 && !turning) {
+				//Putting the players rotation back to 0 degrees
+				correctionProgress += Time.deltaTime;
+				transform.rotation = Quaternion.Euler (new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0));
+			} else if (correctionProgress >= 1) {
+				correctionProgress = 0;
+			} else if (rotationProgress != 0) {
+				rotationProgress = 0;
+			}
+		}
+	}
+	/*
+	 * Collision detection for everyone, so has to be generic
+     * Col is the object this collided with us
+	 */ 
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "Bullet(Clone)") {

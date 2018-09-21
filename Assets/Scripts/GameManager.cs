@@ -5,6 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public bool Xbox_One_Controller;
+	public bool test_mode = false;
 	private static float time = 0f;
 	private static int score = 0;
 	private Text Timer;
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (test_mode) {
+			StateManager.curState = 3;
+		}
 		if (EditorSceneManager.GetActiveScene ().name == "Demo") {
 			UpdateTime ();
 		}
@@ -29,6 +33,13 @@ public class GameManager : MonoBehaviour {
 				//set a controller bool to true
 				Xbox_One_Controller = true;
 			} 
+		}
+		if (StateManager.curState == 2) {
+			if (StateManager.levelStartTimer >= 0) {
+				StateManager.levelStartTimer -= Time.deltaTime;
+			} else {
+				StateManager.curState = 3;
+			}
 		}
 	}
 
