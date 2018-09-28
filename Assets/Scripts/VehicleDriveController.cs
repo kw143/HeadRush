@@ -7,7 +7,9 @@ public class VehicleDriveController : MonoBehaviour {
 	private float rotationProgress = 0f;
 	private Rigidbody rb;
 	private float health;
-
+	public bool upRayHit;
+	public bool downRayHit;
+	public float changeTimer = 0;
 
 	/*
 	 * Getter/Setter for the rigibody
@@ -43,6 +45,29 @@ public class VehicleDriveController : MonoBehaviour {
 		if (Health <= 0) {
 			Destroy (this.gameObject);
 		}
+		int layerMask = 1 << 9;
+		RaycastHit hit;
+
+		Physics.Raycast (transform.position + transform.forward, Vector3.down, out hit, Mathf.Infinity, layerMask);
+		/*downRayHit = Physics.Raycast (transform.position + transform.forward - 10 * transform.up, Vector3.down, 20);
+			
+		if (upRayHit) {
+			rb.constraints = RigidbodyConstraints.None;
+			if (transform.rotation.x > -10) {
+				transform.RotateAround (transform.position, transform.right, Time.deltaTime * -20);
+			}
+			transform.Translate (transform.up * Time.deltaTime * 20);
+		} else if (!upRayHit && downRayHit) {
+			if (transform.rotation.x < 0) {
+				transform.RotateAround (transform.position, transform.right, Time.deltaTime * 20);
+			}
+			rb.constraints = RigidbodyConstraints.FreezePositionY;
+		}
+		if (!downRayHit) {
+			rb.useGravity = true;
+		} else {
+			rb.useGravity = false;
+		}*/
 	}
 
 	/*
