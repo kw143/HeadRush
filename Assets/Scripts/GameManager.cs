@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour {
 				Xbox_One_Controller = true;
 			} 
 		}
+		//This controls the countdown at the beginning of the game
 		if (StateManager.curState == 2) {
 			if (StateManager.levelStartTimer >= 0) {
 				StateManager.levelStartTimer -= Time.deltaTime;

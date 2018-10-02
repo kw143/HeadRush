@@ -45,29 +45,7 @@ public class VehicleDriveController : MonoBehaviour {
 		if (Health <= 0) {
 			Destroy (this.gameObject);
 		}
-		int layerMask = 1 << 9;
-		RaycastHit hit;
 
-		Physics.Raycast (transform.position + transform.forward, Vector3.down, out hit, Mathf.Infinity, layerMask);
-		/*downRayHit = Physics.Raycast (transform.position + transform.forward - 10 * transform.up, Vector3.down, 20);
-			
-		if (upRayHit) {
-			rb.constraints = RigidbodyConstraints.None;
-			if (transform.rotation.x > -10) {
-				transform.RotateAround (transform.position, transform.right, Time.deltaTime * -20);
-			}
-			transform.Translate (transform.up * Time.deltaTime * 20);
-		} else if (!upRayHit && downRayHit) {
-			if (transform.rotation.x < 0) {
-				transform.RotateAround (transform.position, transform.right, Time.deltaTime * 20);
-			}
-			rb.constraints = RigidbodyConstraints.FreezePositionY;
-		}
-		if (!downRayHit) {
-			rb.useGravity = true;
-		} else {
-			rb.useGravity = false;
-		}*/
 	}
 
 	/*
@@ -96,25 +74,34 @@ public class VehicleDriveController : MonoBehaviour {
 	 * Previous steer what the player inputed last frame.
 	 * turning makes sure the player is not turning while banking
 	 * 
-	 */ 
+	 */
+
 	protected void MoveHorizontal (float speed, float correction, float previousSteer, bool turning) {
-		//making sure were in the correct state
 		if (StateManager.curState == 3) {
-			//solves issues of player banking getting stuck
-			if (Mathf.Abs (correction) > .8 && (previousSteer == 0 || previousSteer == correction) && !turning) {
-				rb.AddForce (transform.right * correction * speed * 1500 * Time.deltaTime);
-				if (rotationProgress < .39) { 
-					rotationProgress += Time.deltaTime;
-					transform.RotateAround (transform.position, transform.forward, correction * -1);
-				}
-			} else if (transform.rotation != Quaternion.Euler (0, 0, 0) && correctionProgress < 1 && correctionProgress >= 0 && rotationProgress <= 0 && !turning) {
-				//Putting the players rotation back to 0 degrees
-				correctionProgress += Time.deltaTime;
-				transform.rotation = Quaternion.Euler (new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0));
-			} else if (correctionProgress >= 1) {
-				correctionProgress = 0;
-			} else if (rotationProgress != 0) {
-				rotationProgress = 0;
+			//make sure we only detect landscape
+			int layerMask = 1 << 9;
+			//left side of vehicle
+			RaycastHit lhit;
+			//right side of vehicle
+			RaycastHit rhit;
+			//Getting the ground
+			Physics.Raycast (transform.position + 2 * transform.right, Vector3.down, out rhit, Mathf.Infinity, layerMask);
+			Physics.Raycast (transform.position + -2 * transform.right, Vector3.down, out lhit, Mathf.Infinity, layerMask);
+			//if we turning right
+			if (correction > .8 && !turning) {
+				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance, transform.position + 2 * transform.right);
+				Rb.AddForceAtPosition (transform.up * 1 / lhit.distance * 300, transform.position + -2 * transform.right);
+				Rb.AddForce (transform.right * speed * correction * 78);
+			//left
+			} else if (correction < -.8) {
+				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance * 300, transform.position + 2 * transform.right);
+				Rb.AddForceAtPosition (transform.up * 1 / lhit.distance, transform.position + -2 * transform.right);
+				Rb.AddForce (transform.right * speed * correction * 78);
+			//must bring balance to the forces
+			} else {
+				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance * 15, transform.position + 2 * transform.right);
+				Rb.AddForceAtPosition (transform.up * 1 / lhit.distance * 15, transform.position + -2 * transform.right);
+
 			}
 		}
 	}

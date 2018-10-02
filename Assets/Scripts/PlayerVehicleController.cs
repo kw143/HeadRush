@@ -42,7 +42,22 @@ public class PlayerVehicleController : VehicleDriveController {
 		} else {
 			speedTimer -= Time.deltaTime; //else decrease timer
 		}
-
+		//This ensures they can only collide with landscape layer
+		int layerMask = 1 << 9;
+		//The Raycast hit for the front "Thruster"
+		RaycastHit fhit;
+		//The Raycast hit for the back "Thruster"
+		RaycastHit bhit;
+		//Casting rays to get ground information
+		Physics.Raycast (transform.position + transform.forward * 5, Vector3.down, out fhit, Mathf.Infinity, layerMask);
+		Physics.Raycast (transform.position - transform.forward * 5, Vector3.down, out bhit, Mathf.Infinity, layerMask);
+		//Adding our own gravity
+		Rb.AddForceAtPosition (Vector3.up * -5 * Mathf.Min(fhit.distance, 270), transform.position);
+		//Adding thrust upward
+		Rb.AddForceAtPosition (transform.up * (3750 / fhit.distance), transform.position + transform.forward * 5);
+		Rb.AddForceAtPosition (transform.up * (3750 / bhit.distance), transform.position - transform.forward * 5);
+		//Adding a dampening force
+		Rb.AddForceAtPosition (Vector3.up * -2.5f * Rb.velocity.y, transform.transform.position);
 		previousSteer = correction; //getting the previous correction for use in the method
 		if (gm.Xbox_One_Controller) { //if were using a xbox controller
 			throttle = Input.GetAxis ("Drive"); //left stick Up/Down
