@@ -16,6 +16,8 @@ public class Control: MonoBehaviour {
 	}
 	public void NextScene()
 	{
+		StateManager.curState = 2;
+		StateManager.levelStartTimer = 3.0f;
 		SceneManager.LoadScene("Demo");
 	}
 
