@@ -36,6 +36,9 @@ public class PlayerVehicleController : VehicleDriveController {
 	
 	// Update is called once per frame
 	new void Update () {
+        if (Health <= 0) {
+            gm.EndGame();
+        }
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended
 			speed = 20.0f;
@@ -54,8 +57,8 @@ public class PlayerVehicleController : VehicleDriveController {
 		//Adding our own gravity
 		Rb.AddForceAtPosition (Vector3.up * -5 * Mathf.Min(fhit.distance, 270), transform.position);
 		//Adding thrust upward
-		Rb.AddForceAtPosition (transform.up * (1375 / fhit.distance), transform.position + transform.forward * 5);
-		Rb.AddForceAtPosition (transform.up * (1375 / bhit.distance), transform.position - transform.forward * 5);
+		Rb.AddForceAtPosition (transform.up * (1675 / fhit.distance), transform.position + transform.forward * 5);
+		Rb.AddForceAtPosition (transform.up * (1675 / bhit.distance), transform.position - transform.forward * 5);
 		//Adding a dampening force
 		Rb.AddForceAtPosition (Vector3.up * -2.5f * Rb.velocity.y, transform.transform.position);
 		previousSteer = correction; //getting the previous correction for use in the method
@@ -113,6 +116,8 @@ public class PlayerVehicleController : VehicleDriveController {
 			speed *= 2;
 			speedTimer = 10;
 			Destroy (other.gameObject);
-		}
+        } else {
+            gm.EndGame();
+        }
 	}
 }

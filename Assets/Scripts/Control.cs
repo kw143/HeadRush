@@ -21,6 +21,16 @@ public class Control: MonoBehaviour {
 		SceneManager.LoadScene("Level1");
 	}
 
+    public static void EndGame()
+    {
+        SceneManager.LoadScene("EndGame");
+    }
+
+    public void MainMenu()
+    {
+        StateManager.curState = 1;
+        SceneManager.LoadScene("Menu");
+    }
 }
 
 

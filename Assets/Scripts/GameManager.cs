@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 			StateManager.curState = 3;
 		}
 		if (StateManager.curState == 3) {
+            test_mode = false;
 			UpdateTime ();
 		}
 		temp = StateManager.levelStartTimer;
@@ -40,6 +41,16 @@ public class GameManager : MonoBehaviour {
 				Xbox_One_Controller = true;
 			} 
 		}
+
+        if (StateManager.curState == 4) {
+            int minutes = ((int)time) / 60;
+            int seconds = ((int)time) % 60;
+            int miliseconds = ((int)(time * 100)) % 100;
+            string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
+            Timer.text = "Driver Score: " + Mathf.Ceil(180 - minutes * 60 - seconds).ToString();
+            Scoreboard.text = "Gunner Score: " + score.ToString();
+        }
+
 		//This controls the countdown at the beginning of the game
 		if (StateManager.curState == 2) {
 			if (StateManager.levelStartTimer >= 0) {
@@ -79,4 +90,9 @@ public class GameManager : MonoBehaviour {
 	public static void addScore(int points) {
 		score += points;
 	}
+
+    public void EndGame() {
+        Control.EndGame();
+        StateManager.curState = 4;
+    }
 }
