@@ -117,10 +117,10 @@ public class VehicleDriveController : MonoBehaviour {
 				this.health -= col.gameObject.GetComponent<BulletBehavior> ().Damage;
 			}
 		} else if (col.gameObject.tag == "Obstacle") {
-			this.health = 0;
+			this.health -= 10;
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
-			this.health = 0;
+			this.health -= 10;
 		} 
 	}
 
