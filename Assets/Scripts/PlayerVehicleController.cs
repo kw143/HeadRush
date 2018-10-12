@@ -23,8 +23,8 @@ public class PlayerVehicleController : VehicleDriveController {
 	//Game manager
 	public GameObject gmHolder;
 	private GameManager gm;
-
-
+    private float hoverHeight = 2000f;
+    private float dampeningFactor = 2.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +42,8 @@ public class PlayerVehicleController : VehicleDriveController {
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended
 			speed = 20.0f;
+            dampeningFactor = -2.5f;
+            hoverHeight = 2000f;
 		} else {
 			speedTimer -= Time.deltaTime; //else decrease timer
 		}
@@ -57,10 +59,10 @@ public class PlayerVehicleController : VehicleDriveController {
 		//Adding our own gravity
 		Rb.AddForceAtPosition (Vector3.up * -5 * Mathf.Min(fhit.distance, 270), transform.position);
 		//Adding thrust upward
-		Rb.AddForceAtPosition (transform.up * (1675 / fhit.distance), transform.position + transform.forward * 5);
-		Rb.AddForceAtPosition (transform.up * (1675 / bhit.distance), transform.position - transform.forward * 5);
+		Rb.AddForceAtPosition (transform.up * (hoverHeight / fhit.distance), transform.position + transform.forward * 5);
+		Rb.AddForceAtPosition (transform.up * (hoverHeight / bhit.distance), transform.position - transform.forward * 5);
 		//Adding a dampening force
-		Rb.AddForceAtPosition (Vector3.up * -2.5f * Rb.velocity.y, transform.transform.position);
+		Rb.AddForceAtPosition (Vector3.up * dampeningFactor * Rb.velocity.y, transform.transform.position);
 		previousSteer = correction; //getting the previous correction for use in the method
 		if (gm.Xbox_One_Controller) { //if were using a xbox controller
 			throttle = Input.GetAxis ("Drive"); //left stick Up/Down
@@ -113,9 +115,11 @@ public class PlayerVehicleController : VehicleDriveController {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.tag == "SpeedBoost") {
-			speed *= 2;
-			speedTimer = 10;
-			Destroy (other.gameObject);
+            Destroy(other.gameObject);
+            speed *= 1.35f;
+            hoverHeight *= 1.4f;
+			speedTimer = 4;
+            dampeningFactor *= 2;
         } else {
             gm.EndGame();
         }
