@@ -91,12 +91,12 @@ public class VehicleDriveController : MonoBehaviour {
 			if (correction > .8 && !turning) {
 				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance, transform.position + 2 * transform.right);
 				Rb.AddForceAtPosition (transform.up * 1 / lhit.distance * 300, transform.position + -2 * transform.right);
-				Rb.AddForce (transform.right * speed * correction * 78);
+				Rb.AddForce (transform.right * speed * correction * 20);
 			//left
 			} else if (correction < -.8) {
 				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance * 300, transform.position + 2 * transform.right);
 				Rb.AddForceAtPosition (transform.up * 1 / lhit.distance, transform.position + -2 * transform.right);
-				Rb.AddForce (transform.right * speed * correction * 78);
+                Rb.AddForce (transform.right * speed * correction * 20);
 			//must bring balance to the forces
 			} else {
 				Rb.AddForceAtPosition (transform.up * 1 / rhit.distance * 15, transform.position + 2 * transform.right);
@@ -117,10 +117,10 @@ public class VehicleDriveController : MonoBehaviour {
 				this.health -= col.gameObject.GetComponent<BulletBehavior> ().Damage;
 			}
 		} else if (col.gameObject.tag == "Obstacle") {
-			this.health = 0;
+			this.health -= 10;
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
-			this.health = 0;
+			this.health -= 10;
 		} 
 	}
 
