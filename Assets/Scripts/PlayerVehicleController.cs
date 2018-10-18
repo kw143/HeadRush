@@ -109,18 +109,23 @@ public class PlayerVehicleController : VehicleDriveController {
 	 */ 
 	void TurnRotate (float turn, float speed) {
 		if (StateManager.curState == 3) {
-			transform.RotateAround (transform.position, transform.up, turn * speed / 5);
+            //transform.RotateAround (transform.position, transform.up, turn * speed / 5);
+            Rb.AddTorque(transform.up * turn * speed * 40);
 		}
 	}
 
 	void OnTriggerEnter (Collider other) {
+        if (other.GetComponent<EnemyStarter>() != null) {
+            other.GetComponent<EnemyStarter>().Activate();
+            Destroy(other.gameObject);
+        }
 		if (other.gameObject.tag == "SpeedBoost") {
             Destroy(other.gameObject);
             speed *= 1.35f;
             hoverHeight *= 1.4f;
 			speedTimer = 4;
             dampeningFactor *= 2;
-        } else {
+        } else if (other.gameObject.tag == "FinishLine"){
             gm.EndGame();
         }
 	}

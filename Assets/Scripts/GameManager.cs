@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 		if (StateManager.curState == 3) {
             test_mode = false;
 			UpdateTime ();
-        } else if (StateManager.curState == 2) {
+        } else if (StateManager.curState == 1) {
             time = 0f;
             score = 0;
         }
