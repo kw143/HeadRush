@@ -10,7 +10,8 @@ public class Chase : EnemyVehicleController
     int MoveSpeed = 21;
     int MaxDist = 10;
     int MinDist = 5;
-    private float startingHealth = 10f;
+    int detectDist = 25;
+    private float startingHealth = 60f;
 
 
 
@@ -28,6 +29,12 @@ public class Chase : EnemyVehicleController
         base.Update();
         transform.LookAt(vehicle);
 
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Vector3 bwd = transform.TransformDirection(Vector3.back);
+        Vector3 lwd = transform.TransformDirection(Vector3.left);
+        Vector3 rwd = transform.TransformDirection(Vector3.right);
+        Rigidbody rrb = gameObject.GetComponent<Rigidbody>();
+
         if (Vector3.Distance(transform.position, vehicle.position) >= MinDist)
         {
 
@@ -42,6 +49,18 @@ public class Chase : EnemyVehicleController
                 //Shoot at here or something
             }
 
+            if (Physics.Raycast(transform.position, fwd, detectDist))
+                rrb.AddForce(transform.forward * speed * -2500 * Time.deltaTime);
+
+            if (Physics.Raycast(transform.position, bwd, detectDist))
+                rrb.AddForce(transform.forward * speed * 2500 * Time.deltaTime);
+
+            if (Physics.Raycast(transform.position, lwd, detectDist))
+                rrb.AddForce(transform.right * speed * 2500 * Time.deltaTime);
+
+            if (Physics.Raycast(transform.position, rwd, detectDist))
+                rrb.AddForce(transform.right * speed * -2500 * Time.deltaTime);
         }
+
     }
 }
