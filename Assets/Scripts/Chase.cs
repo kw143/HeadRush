@@ -10,8 +10,8 @@ public class Chase : EnemyVehicleController
     int MoveSpeed = 21;
     int MaxDist = 10;
     int MinDist = 5;
-    int detectDist = 25;
-    private float startingHealth = 60f;
+    int detectDist = 150;
+    private float startingHealth = 10f;
 
 
 
@@ -33,13 +33,14 @@ public class Chase : EnemyVehicleController
         Vector3 bwd = transform.TransformDirection(Vector3.back);
         Vector3 lwd = transform.TransformDirection(Vector3.left);
         Vector3 rwd = transform.TransformDirection(Vector3.right);
-        Rigidbody rrb = gameObject.GetComponent<Rigidbody>();
-
+        Rigidbody rrb = base.Rb;
+        int layerMask = 1 << 8;
+        layerMask = ~layerMask;
         if (Vector3.Distance(transform.position, vehicle.position) >= MinDist)
         {
 
             //transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-            this.MoveZDir(MoveSpeed, 1);
+            //this.MoveZDir(MoveSpeed, 1);
 
 
 
@@ -49,17 +50,26 @@ public class Chase : EnemyVehicleController
                 //Shoot at here or something
             }
 
-            if (Physics.Raycast(transform.position, fwd, detectDist))
-                rrb.AddForce(transform.forward * speed * -2500 * Time.deltaTime);
-
-            if (Physics.Raycast(transform.position, bwd, detectDist))
-                rrb.AddForce(transform.forward * speed * 2500 * Time.deltaTime);
-
-            if (Physics.Raycast(transform.position, lwd, detectDist))
-                rrb.AddForce(transform.right * speed * 2500 * Time.deltaTime);
-
-            if (Physics.Raycast(transform.position, rwd, detectDist))
+            if (Physics.Raycast(transform.position, fwd, detectDist, layerMask))
+            {
                 rrb.AddForce(transform.right * speed * -2500 * Time.deltaTime);
+            }
+            else if (Physics.Raycast(transform.position, bwd, detectDist, layerMask))
+            {
+                rrb.AddForce(transform.forward * speed * 2500 * Time.deltaTime);
+            }
+            else if (Physics.Raycast(transform.position, lwd, detectDist, layerMask))
+            {
+                rrb.AddForce(transform.forward * speed * 2500 * Time.deltaTime);
+            }
+            else if (Physics.Raycast(transform.position, rwd, detectDist, layerMask))
+            {
+                rrb.AddForce(transform.right * speed * -2500 * Time.deltaTime);
+            }
+            else
+            {
+                this.MoveZDir(MoveSpeed, 1);
+            }
         }
 
     }
