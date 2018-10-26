@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public bool test_mode = false;
 	private static float time = 0f;
 	private static int score = 0;
+    private static int timerscore = 0;
 	private Text Timer;
 	private Text Scoreboard;
 	public float temp = 0;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour {
             int seconds = ((int)time) % 60;
             int miliseconds = ((int)(time * 100)) % 100;
             string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
-            Timer.text = "Driver Score: " + Mathf.Ceil(180 - minutes * 60 - seconds).ToString();
+            Timer.text = "Driver Score: " + Mathf.Ceil(timerscore - minutes * 60 - seconds).ToString();
             Scoreboard.text = "Gunner Score: " + score.ToString();
         }
 
@@ -93,6 +94,11 @@ public class GameManager : MonoBehaviour {
 	public static void addScore(int points) {
 		score += points;
 	}
+
+    public static void addTimerScore(int points)
+    {
+        timerscore += points;
+    }
 
     public void EndGame() {
         Control.EndGame();
