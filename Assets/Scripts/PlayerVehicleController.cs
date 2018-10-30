@@ -118,6 +118,9 @@ public class PlayerVehicleController : VehicleDriveController {
         if (other.GetComponent<EnemyStarter>() != null) {
             other.GetComponent<EnemyStarter>().Activate();
             Destroy(other.gameObject);
+        } else if (other.GetComponent<Checkpoint>() != null) {
+            other.GetComponent<Checkpoint>().checkpoint();
+            Destroy(other.gameObject);
         }
 		if (other.gameObject.tag == "SpeedBoost") {
             Destroy(other.gameObject);
