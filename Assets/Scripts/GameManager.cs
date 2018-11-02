@@ -104,4 +104,18 @@ public class GameManager : MonoBehaviour {
         Control.EndGame();
         StateManager.curState = 4;
     }
+
+    public void Pause() {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1f;
+            Control.Unpause();
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            Control.Pause();
+        }
+
+    }
 }
