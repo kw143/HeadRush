@@ -18,8 +18,8 @@ public class Control: MonoBehaviour {
 	{
 		StateManager.curState = 2;
 		StateManager.levelStartTimer = 3.0f;
-		SceneManager.LoadScene("Level1");
-        SceneManager.UnloadSceneAsync("Menu");
+		SceneManager.LoadScene("MainLevel");
+     
 	}
 
     public static void EndGame()
@@ -42,7 +42,7 @@ public class Control: MonoBehaviour {
     }
 
     public static void Unpause() {
-        SceneManager.UnloadSceneAsync("Pause");
+        
     }
 }
 
