@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4374179506132884}
   - component: {fileID: 33783706035129820}
-  - component: {fileID: 65092416241062142}
   - component: {fileID: 23861981092459364}
+  - component: {fileID: 65744986392824074}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Obstacle
@@ -35,9 +35,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1915744930094656}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1281.0619, y: 30.4, z: -433.95435}
-  m_LocalScale: {x: 430, y: 550, z: 430}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1974.2627, y: -196.24664, z: 2146.9167}
+  m_LocalScale: {x: 10.72386, y: 11.851223, z: 10.72386}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1915744930094656}
   m_Mesh: {fileID: 4300000, guid: ecace52fc28334c879ff3348075c05f5, type: 3}
---- !u!65 &65092416241062142
+--- !u!65 &65744986392824074
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,5 +94,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02860643, y: 0.09258626, z: 0.030923324}
-  m_Center: {x: -0.0015607312, y: 0.0020281456, z: -0.00022599347}
+  m_Size: {x: 3.3703785, y: 10.080944, z: 3.3703792}
+  m_Center: {x: 0, y: 0, z: 0}
