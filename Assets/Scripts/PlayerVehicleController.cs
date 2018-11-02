@@ -68,6 +68,9 @@ public class PlayerVehicleController : VehicleDriveController {
 			throttle = Input.GetAxis ("Drive"); //left stick Up/Down
 			correction = Input.GetAxis ("Steer"); //left stick Left/Right
 			turn = Input.GetAxis ("Turn"); //right stick Left/Right
+            if (Input.GetKey(KeyCode.JoystickButton7)) {
+                gm.Pause();
+            }
 		} else {
 			if (Input.GetKey (KeyCode.W)) {
 				throttle = 1;
@@ -85,6 +88,10 @@ public class PlayerVehicleController : VehicleDriveController {
 			} else if (Input.GetKey (KeyCode.D)) {
 				turn = 1;
 			}
+
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                gm.Pause();
+            }
 		}
 		//useful in two spots, here and to make sure we're allowed to bank
 		turning = Mathf.Abs (turn) > .1;
