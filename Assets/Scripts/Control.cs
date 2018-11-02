@@ -19,17 +19,30 @@ public class Control: MonoBehaviour {
 		StateManager.curState = 2;
 		StateManager.levelStartTimer = 3.0f;
 		SceneManager.LoadScene("Level1");
+        SceneManager.UnloadSceneAsync("Menu");
 	}
 
     public static void EndGame()
     {
-        SceneManager.LoadScene("EndGame");
+        SceneManager.LoadScene("EndGameScreen");
     }
 
     public void MainMenu()
     {
         StateManager.curState = 1;
         SceneManager.LoadScene("Menu");
+    }
+
+    public void ControlMenu() {
+        SceneManager.LoadScene("Controls");
+    }
+
+    public static void Pause() {
+        SceneManager.LoadScene("Pause");
+    }
+
+    public static void Unpause() {
+        SceneManager.UnloadSceneAsync("Pause");
     }
 }
 
