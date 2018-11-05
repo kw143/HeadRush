@@ -15,10 +15,20 @@ public class EnemyVehicleController : VehicleDriveController {
 
 	}
 
+    new void Death() {
+        this.GetComponent<EnemyDeath>().triggerDeath = true;
+        speed = 0;
+        Destroy(this.gameObject);
+    }
+
 	// Update is called once per frame
 	new void Update () {
 		base.Update();
-		MoveZDir (speed, 1);
+        if (base.Health <= 0)
+        {
+            Death();
+        }
+        MoveZDir(speed, 1);
 		//This ensures they can only collide with landscape layer
 		int layerMask = 1 << 9;
 		//The Raycast hit for the front "Thruster"
