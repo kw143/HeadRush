@@ -6,11 +6,11 @@ public class EnemyVehicleController : VehicleDriveController {
 
 	public float speed = 19f;
 	private float correction;
-	private float startingHealth = 10f;
+
 	public GameObject player;
 	// Use this for initialization
 	void Start () {
-		base.Health = startingHealth;
+        base.health = 10f;
 		base.Rb = gameObject.GetComponent<Rigidbody> ();
 
 	}

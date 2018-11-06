@@ -6,11 +6,11 @@ public class Chase : EnemyVehicleController
 {
 
     public Transform vehicle;
-    new private GameObject player;
-    int MoveSpeed = 21;
-    int MaxDist = 10;
-    int MinDist = 5;
-    int detectDist = 150;
+    //new private GameObject player;
+    private int MoveSpeed = 21;
+    private int MaxDist = 10;
+    private int MinDist = 5;
+    private int detectDist = 150;
     private float startingHealth = 10f;
 
 
