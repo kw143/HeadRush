@@ -41,6 +41,7 @@ public class PlayerVehicleController : VehicleDriveController {
 	
 	// Update is called once per frame
 	new void Update () {
+
         if (Health <= 0) {
             gm.EndGame();
         }
