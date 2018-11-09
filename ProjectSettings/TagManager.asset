@@ -9,6 +9,9 @@ TagManager:
   - SpeedBoost
   - Enemy
   - FinishLine
+  - Test
+  - InverseTrap
+  - SlowTrap
   layers:
   - Default
   - TransparentFX

@@ -18,31 +18,40 @@ public class Control: MonoBehaviour {
 	{
 		StateManager.curState = 2;
 		StateManager.levelStartTimer = 3.0f;
-		SceneManager.LoadScene("MainLevel");
+        Scene curscene = SceneManager.GetActiveScene();
+        SceneManager.UnloadSceneAsync(curscene.buildIndex);
+        SceneManager.LoadSceneAsync("MainLevel");
+
+
      
 	}
 
     public static void EndGame()
     {
-        SceneManager.LoadScene("EndGameScreen");
+        SceneManager.LoadSceneAsync("EndGameScreen");
     }
 
     public void MainMenu()
     {
         StateManager.curState = 1;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadSceneAsync("Menu");
     }
 
     public void ControlMenu() {
-        SceneManager.LoadScene("Controls");
+        SceneManager.LoadSceneAsync("Controls");
     }
 
     public static void Pause() {
-        SceneManager.LoadScene("Pause");
+        SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
     }
 
     public static void Unpause() {
-        
+        SceneManager.UnloadSceneAsync("Pause");
+    }
+
+    public void Buttonunpause() {
+        Time.timeScale = 1f;
+        SceneManager.UnloadSceneAsync("Pause");
     }
 }
 

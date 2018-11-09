@@ -6,7 +6,7 @@ public class VehicleDriveController : MonoBehaviour {
 	private float correctionProgress = 0f;
 	private float rotationProgress = 0f;
 	private Rigidbody rb;
-	private float health;
+	public float health;
 	public bool upRayHit;
 	public bool downRayHit;
 	public float changeTimer = 0;
@@ -40,12 +40,13 @@ public class VehicleDriveController : MonoBehaviour {
 		
 	}
 	
+    protected void Death() {
+        //Destroy(this.gameObject);
+    }
+
 	// Update is called once per frame
 	protected void Update () {
-		if (Health <= 0) {
-			Destroy (this.gameObject);
-		}
-
+		
 	}
 
 	/*

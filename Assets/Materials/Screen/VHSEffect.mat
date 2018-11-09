@@ -66,16 +66,16 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GoTan: -0.9544879
+    - _GoTan: 0.000000010847535
     - _Intensity: 0.47
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OffsetColor: 0.0029911636
+    - _OffsetColor: 0.0029925539
     - _OffsetDistortion: 200
-    - _OffsetNoiseX: 0.49482182
-    - _OffsetNoiseY: -2.8482063
-    - _OffsetPosY: -1.2481162e-14
+    - _OffsetNoiseX: 0.30562854
+    - _OffsetNoiseY: -2.9005017
+    - _OffsetPosY: 4.952527e-31
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
