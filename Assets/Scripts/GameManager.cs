@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public bool Xbox_One_Controller;
@@ -24,7 +24,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (test_mode) {
+        if (StateManager.curState == 2)
+        {
+            time = 0f;
+            score = 0;
+        }
+        if (test_mode) {
 			StateManager.curState = 3;
 		}
 		if (StateManager.curState == 3) {
@@ -106,15 +111,18 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Pause() {
-        if (Time.timeScale == 0)
+        if (Time.timeScale < .5f)
         {
+            /*
             Time.timeScale = 1f;
             Control.Unpause();
+            print("Unpause");*/
         }
         else
         {
             Time.timeScale = 0f;
             Control.Pause();
+            //print("Pause");
         }
 
     }

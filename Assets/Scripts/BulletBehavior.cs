@@ -22,7 +22,7 @@ public class BulletBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (rb.velocity.z < 100) {
+		if (rb.velocity.z < 1000) {
 			rb.AddForce (transform.up * 100000 *Time.deltaTime);
 		}
 	}
