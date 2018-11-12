@@ -118,6 +118,10 @@ public class VehicleDriveController : MonoBehaviour {
 				this.health -= col.gameObject.GetComponent<BulletBehavior> ().Damage;
 			}
 		} else if (col.gameObject.tag == "Obstacle") {
+            if (this.gameObject.tag == "Player")
+            {
+                this.gameObject.GetComponent<AudioSource>().Play();
+            }
 			this.health -= 10;
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {

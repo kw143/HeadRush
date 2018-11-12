@@ -16,15 +16,14 @@ public class Control: MonoBehaviour {
 	}
 	public void NextScene()
 	{
-		StateManager.curState = 2;
-		StateManager.levelStartTimer = 3.0f;
-        Scene curscene = SceneManager.GetActiveScene();
-        SceneManager.UnloadSceneAsync(curscene.buildIndex);
+		
         SceneManager.LoadSceneAsync("MainLevel");
+        StateManager.curState = 2;
+        StateManager.levelStartTimer = 3.0f;
 
 
-     
-	}
+
+    }
 
     public static void EndGame()
     {
@@ -50,8 +49,20 @@ public class Control: MonoBehaviour {
     }
 
     public void Buttonunpause() {
+
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync("Pause");
+    }
+
+    public void SettingsMenu() {
+        SceneManager.LoadSceneAsync("Settings", LoadSceneMode.Single);
+    }
+
+    public void MenuFromPause() {
+        Time.timeScale = 1f;
+        StateManager.curState = 1;
+        SceneManager.LoadSceneAsync("Menu");
+
     }
 }
 

@@ -24,12 +24,13 @@ public class PlayerVehicleController : VehicleDriveController {
 	public GameObject gmHolder;
 	private GameManager gm;
     private float hoverHeight = 2000f;
-    private float dampeningFactor = 2.5f;
+    private float dampeningFactor = 3.5f;
     private int inverseTrap = 1;
     //how long does inverse effect happen
     private float inverseTimer;
     //how long does slow effect happen
     private float slowTimer;
+    private bool ended = false;
 
     // Use this for initialization
     void Start () {
@@ -40,10 +41,14 @@ public class PlayerVehicleController : VehicleDriveController {
 	}
 	
 	// Update is called once per frame
-	new void Update () {
+	void FixedUpdate () {
 
         if (Health <= 0) {
-            gm.EndGame();
+            if (!ended)
+            {
+                gm.EndGame();
+                ended = true;
+            }
         }
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended
@@ -81,7 +86,7 @@ public class PlayerVehicleController : VehicleDriveController {
 		Physics.Raycast (transform.position + transform.forward * 5, Vector3.down, out fhit, Mathf.Infinity, layerMask);
 		Physics.Raycast (transform.position - transform.forward * 5, Vector3.down, out bhit, Mathf.Infinity, layerMask);
 		//Adding our own gravity
-		Rb.AddForceAtPosition (Vector3.up * -5 * Mathf.Min(fhit.distance, 270), transform.position);
+		Rb.AddForceAtPosition (Vector3.up * -5 * Mathf.Min(fhit.distance, 30), transform.position);
 		//Adding thrust upward
 		Rb.AddForceAtPosition (transform.up * (hoverHeight / fhit.distance), transform.position + transform.forward * 5);
 		Rb.AddForceAtPosition (transform.up * (hoverHeight / bhit.distance), transform.position - transform.forward * 5);
