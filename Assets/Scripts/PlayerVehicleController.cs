@@ -32,6 +32,8 @@ public class PlayerVehicleController : VehicleDriveController {
     private float slowTimer;
     private bool ended = false;
 
+    public GameObject[] healthBar;
+
     // Use this for initialization
     void Start () {
 		base.Rb = GetComponent<Rigidbody> ();
@@ -41,14 +43,20 @@ public class PlayerVehicleController : VehicleDriveController {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+    void FixedUpdate () {
+        
 
         if (Health <= 0) {
+            healthBar[2].SetActive(false);
             if (!ended)
             {
                 gm.EndGame();
                 ended = true;
             }
+        } else if (Health <= (2 * startingHealth / 3) && Health > (startingHealth / 3)) {
+            healthBar[0].SetActive(false);
+        } else if (Health <= startingHealth / 3) {
+            healthBar[1].SetActive(false);
         }
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended

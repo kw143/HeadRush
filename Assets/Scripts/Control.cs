@@ -64,6 +64,10 @@ public class Control: MonoBehaviour {
         SceneManager.LoadSceneAsync("Menu");
 
     }
+
+    public void Credits() {
+        SceneManager.LoadSceneAsync("Credits", LoadSceneMode.Single);
+    }
 }
 
 

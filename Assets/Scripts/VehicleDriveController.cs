@@ -10,6 +10,7 @@ public class VehicleDriveController : MonoBehaviour {
 	public bool upRayHit;
 	public bool downRayHit;
 	public float changeTimer = 0;
+    public bool hitCapable = true;
 
 	/*
 	 * Getter/Setter for the rigibody
@@ -126,7 +127,14 @@ public class VehicleDriveController : MonoBehaviour {
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
 			this.health -= 10;
-		} 
+        } else if (col.gameObject.tag == "Player") {
+            if (hitCapable)
+            {
+                hitCapable = false;
+                col.gameObject.GetComponent<PlayerVehicleController>().Health -= 5;
+                this.Health -= 10;
+            }
+        }
 	}
 
 

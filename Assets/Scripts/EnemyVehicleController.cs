@@ -7,6 +7,7 @@ public class EnemyVehicleController : VehicleDriveController {
 	public float speed = 19f;
 	private float correction;
 
+
 	public GameObject player;
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class EnemyVehicleController : VehicleDriveController {
     new void Death() {
         this.GetComponent<EnemyDeath>().triggerDeath = true;
         speed = 0;
+
         Destroy(this.gameObject);
     }
 
