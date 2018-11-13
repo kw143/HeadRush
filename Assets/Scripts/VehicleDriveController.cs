@@ -126,7 +126,7 @@ public class VehicleDriveController : MonoBehaviour {
 			this.health -= 10;
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
-			this.health -= 10;
+			this.health -= 5;
         } else if (col.gameObject.tag == "Player") {
             if (hitCapable)
             {
