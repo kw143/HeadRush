@@ -612,7 +612,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1635606311307378}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1160, y: 12.779999, z: -863}
+  m_LocalPosition: {x: 1182.8231, y: 17.4, z: -850.20166}
   m_LocalScale: {x: 10, y: 4, z: 20}
   m_Children:
   - {fileID: 4554809021171210}
@@ -1576,8 +1576,13 @@ MonoBehaviour:
   upRayHit: 0
   downRayHit: 0
   changeTimer: 0
+  hitCapable: 1
   speed: 20
   gmHolder: {fileID: 0}
+  healthBar:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114262485897089296
 MonoBehaviour:
   m_ObjectHideFlags: 1
