@@ -9,6 +9,8 @@ public class GunController : MonoBehaviour {
 	private int bulletNum = 0;
 	private int maxBullets = 150;
 
+    public AudioSource[] gunsAud;
+
 	public GameObject vehicle;
 	public GameObject bulletSpawn1;
 
@@ -76,11 +78,13 @@ public class GunController : MonoBehaviour {
 					bulletPool [bulletNum % maxBullets].GetComponent<Rigidbody> ().velocity = new Vector3 (0, 0, 0);
 					bulletPool [bulletNum % maxBullets].transform.position = bulletSpawn1.transform.position;
 					bulletPool [bulletNum % maxBullets].transform.rotation = bulletSpawn1.transform.rotation;
+                    gunsAud[0].Play();
 				} else {
 					bulletPool [bulletNum % maxBullets].GetComponent<Rigidbody> ().velocity = new Vector3 (0, 0, 0);
 					bulletPool [bulletNum % maxBullets].transform.position = bulletSpawn2.transform.position;
 					bulletPool [bulletNum % maxBullets].transform.rotation = bulletSpawn2.transform.rotation;
-				}
+                    gunsAud[1].Play();
+                }
 				bulletNum++;
 				cooldown = .3f;
 			}
