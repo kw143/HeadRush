@@ -12,12 +12,14 @@ public class Chase : EnemyVehicleController
     private int MinDist = 5;
     private int detectDist = 150;
     private float startingHealth = 10f;
-
+    public AudioSource deathSound;
 
     new void Death()
     {
+
         this.GetComponent<EnemyDeath>().triggerDeath = true;
         speed = 0;
+
 
     }
 
@@ -33,9 +35,10 @@ public class Chase : EnemyVehicleController
 
     new void Update()
     {
-        
+
         if (base.Health <= 0)
         {
+            deathSound.Play();
             Death();
         }
         MoveZDir(speed, 1);

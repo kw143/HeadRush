@@ -13,6 +13,17 @@ public class GameManager : MonoBehaviour {
 	private Text Scoreboard;
 	public float temp = 0;
 	public GameObject[] countDowns = new GameObject[3];
+    private float maxVol = 1;
+
+    public float MaxVol {
+        get {
+            return maxVol;
+        }
+        set {
+            maxVol = value;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 		Timer = GameObject.Find ("Timer").GetComponent<Text>();
@@ -61,9 +72,9 @@ public class GameManager : MonoBehaviour {
         }
 
 		//This controls the countdown at the beginning of the game
-		if (StateManager.curState == 2) {
+		if (StateManager.curState == 2 && countDowns[0] != null) {
 			if (StateManager.levelStartTimer >= 0) {
-				StateManager.levelStartTimer -= Time.deltaTime;
+                StateManager.levelStartTimer -= Time.deltaTime;
 				if (StateManager.levelStartTimer > 2) {
 					countDowns[0].SetActive (true);
 					countDowns[1].SetActive (false);
@@ -121,6 +132,7 @@ public class GameManager : MonoBehaviour {
         else
         {
             Time.timeScale = 0f;
+
             Control.Pause();
             //print("Pause");
         }
