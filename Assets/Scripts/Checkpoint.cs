@@ -21,6 +21,7 @@ public class Checkpoint : MonoBehaviour {
         if (!triggered)
         {
             GameManager.addTimerScore(points);
+            Destroy(this.gameObject);
             triggered = true;
         }
     }

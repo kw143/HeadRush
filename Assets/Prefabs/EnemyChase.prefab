@@ -57,9 +57,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350271924734348}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2011.4292, y: 31, z: 91.02832}
-  m_LocalScale: {x: 30.585802, y: 30.5858, z: 30.585802}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3611.7524, y: -563.78, z: 6528.847}
+  m_LocalScale: {x: 30.585808, y: 30.585808, z: 30.585802}
   m_Children:
   - {fileID: 4266359365387206}
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 301dc6596f6844920b41c65742c6e385, type: 2}
+  - {fileID: 2100000, guid: a6c24329667b148769f7c8c433eea9d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -368,7 +368,10 @@ MonoBehaviour:
   upRayHit: 0
   downRayHit: 0
   changeTimer: 0
-  speed: 19
+  hitCapable: 1
+  wallHit: 1
+  wallCooldown: 1
+  speed: 25
   player: {fileID: 0}
   vehicle: {fileID: 0}
   deathSound: {fileID: 82136961841295852}
