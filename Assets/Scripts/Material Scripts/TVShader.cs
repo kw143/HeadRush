@@ -17,6 +17,7 @@ public class TVShader : MonoBehaviour
 	public float colorShiftMax = 0.05f;
 	[Header("Distortion")]
 	public bool doDistortion = true;
+	public float startDistortion = 480;
 	public int distortionRand = 15;
 	public float disortionMin = 100;
 	public float disortionMax = 200;
@@ -31,7 +32,10 @@ public class TVShader : MonoBehaviour
 		//_material.SetTexture("_SecondaryTex", Resources.Load("Textures/TVnoise") as Texture);
 		_material.SetFloat("_OffsetPosY", 0f);
 		_material.SetFloat("_OffsetColor", 0.05f);
-		_material.SetFloat("_OffsetDistortion", 480f);
+		if (doDistortion)
+			_material.SetFloat("_OffsetDistortion", startDistortion);
+		else
+			_material.SetFloat("_OffsetDistortion", 2000);
 	}
 
 	public void OnRenderImage(RenderTexture source, RenderTexture destination)
