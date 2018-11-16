@@ -106,7 +106,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1313784870034968}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3abc532aad827b4cbf370d5929c3566, type: 3}
   m_Name: 
@@ -116,6 +116,8 @@ MonoBehaviour:
   downRayHit: 0
   changeTimer: 0
   hitCapable: 1
+  wallHit: 1
+  wallCooldown: 1
   speed: 10
   player: {fileID: 0}
   vehicle: {fileID: 0}
