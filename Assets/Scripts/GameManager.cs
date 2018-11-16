@@ -68,8 +68,15 @@ public class GameManager : MonoBehaviour {
             int minutes = ((int)time) / 60;
             int seconds = ((int)time) % 60;
             int miliseconds = ((int)(time * 100)) % 100;
-            string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
-            Timer.text = "Driver Score: " + Mathf.Ceil(timerscore - minutes * 60 - seconds).ToString();
+            if (seconds < 10)
+            {
+                string format = minutes.ToString() + ":0" + seconds.ToString() + "." + miliseconds.ToString();
+            }
+            else
+            {
+                string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
+            }
+            Timer.text = "Driver Score: " + (Mathf.Ceil(timerscore - minutes * 60 - seconds) + (miliseconds / 100)).ToString();
             Scoreboard.text = "Gunner Score: " + score.ToString();
         }
 
@@ -102,8 +109,16 @@ public class GameManager : MonoBehaviour {
 		int minutes = ((int)time) / 60;
 		int seconds = ((int)time) % 60;
 		int miliseconds = ((int)(time * 100)) % 100;
-		string format = minutes.ToString () + ":" + seconds.ToString () + "." + miliseconds.ToString ();
-		Timer.text = format;
+        string format = "";
+        if (seconds < 10)
+        {
+            format = minutes.ToString() + ":0" + seconds.ToString() + "." + miliseconds.ToString();
+        }
+        else
+        {
+            format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
+        }
+        Timer.text = format;
 	}
 	void UpdateScore(){
 		Scoreboard.text = "Score: " + score.ToString ();

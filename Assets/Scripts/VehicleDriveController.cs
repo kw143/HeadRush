@@ -11,6 +11,8 @@ public class VehicleDriveController : MonoBehaviour {
 	public bool downRayHit;
 	public float changeTimer = 0;
     public bool hitCapable = true;
+    public bool wallHit = true;
+    public float wallCooldown = 1f;
 
 	/*
 	 * Getter/Setter for the rigibody
@@ -47,7 +49,7 @@ public class VehicleDriveController : MonoBehaviour {
 
 	// Update is called once per frame
 	protected void Update () {
-		
+
 	}
 
 	/*
@@ -126,7 +128,11 @@ public class VehicleDriveController : MonoBehaviour {
 			this.health -= 10;
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Landscape") {
-			this.health -= 5;
+            if (wallHit)
+            {
+                wallHit = false;
+                this.health -= 5;
+            }
         } else if (col.gameObject.tag == "Player") {
             if (hitCapable)
             {

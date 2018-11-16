@@ -42,22 +42,76 @@ public class PlayerVehicleController : VehicleDriveController {
 		gm = gmHolder.GetComponent<GameManager> ();
 
 	}
-	
-	// Update is called once per frame
-    void FixedUpdate () {
-        
 
-        if (Health <= 0) {
+
+   
+    // Update is called once per frame
+    new void Update()
+    {
+
+        if (!wallHit)
+        {
+            wallCooldown -= Time.deltaTime;
+        }
+        if (wallCooldown < 0)
+        {
+            wallHit = true;
+            wallCooldown = 1f;
+        }
+
+        if (Health <= 0)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
             healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+            healthBar[4].SetActive(false);
+            healthBar[5].SetActive(false);
+
             if (!ended)
             {
                 gm.EndGame();
                 ended = true;
             }
-        } else if (Health <= (2 * startingHealth / 3) && Health > (startingHealth / 3)) {
+        }
+        else if (Health < startingHealth && Health > 5 * startingHealth / 6)
+        {
+            temp = 1 / 6;
+        }
+        else if (Health <= startingHealth * 5 / 6 && Health > 2 * startingHealth / 3)
+        {
             healthBar[0].SetActive(false);
-        } else if (Health <= startingHealth / 3) {
+            
+
+        }
+        else if (Health <= (startingHealth * 2) / 3 && Health > startingHealth / 2)
+        {
+            healthBar[0].SetActive(false);
             healthBar[1].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 2 && Health >  startingHealth / 3)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 3 && Health > startingHealth / 6)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 6 && Health > 0) {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+            healthBar[4].SetActive(false);
+
         }
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended
@@ -111,7 +165,7 @@ public class PlayerVehicleController : VehicleDriveController {
             } else {
                 throttle = 0;
             }
-            temp = Input.GetAxis("Drive");
+
             if (Input.GetKey(KeyCode.JoystickButton14) || Input.GetKey(KeyCode.JoystickButton5))
             {
                 correction = 1;
@@ -130,7 +184,7 @@ public class PlayerVehicleController : VehicleDriveController {
             } else {
                 turn = 0;
             }
-            if (Input.GetKey(KeyCode.JoystickButton7)) {
+            if (Input.GetKey(KeyCode.JoystickButton7) || Input.GetKey(KeyCode.Joystick1Button9)) {
                 gm.Pause();
             }
 		} else {
