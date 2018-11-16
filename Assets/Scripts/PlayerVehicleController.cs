@@ -31,6 +31,7 @@ public class PlayerVehicleController : VehicleDriveController {
     //how long does slow effect happen
     private float slowTimer;
     private bool ended = false;
+    public float temp;
 
     public GameObject[] healthBar;
 
@@ -41,22 +42,76 @@ public class PlayerVehicleController : VehicleDriveController {
 		gm = gmHolder.GetComponent<GameManager> ();
 
 	}
-	
-	// Update is called once per frame
-    void FixedUpdate () {
-        
 
-        if (Health <= 0) {
+
+   
+    // Update is called once per frame
+    new void Update()
+    {
+
+        if (!wallHit)
+        {
+            wallCooldown -= Time.deltaTime;
+        }
+        if (wallCooldown < 0)
+        {
+            wallHit = true;
+            wallCooldown = 1f;
+        }
+
+        if (Health <= 0)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
             healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+            healthBar[4].SetActive(false);
+            healthBar[5].SetActive(false);
+
             if (!ended)
             {
                 gm.EndGame();
                 ended = true;
             }
-        } else if (Health <= (2 * startingHealth / 3) && Health > (startingHealth / 3)) {
+        }
+        else if (Health < startingHealth && Health > 5 * startingHealth / 6)
+        {
+            temp = 1 / 6;
+        }
+        else if (Health <= startingHealth * 5 / 6 && Health > 2 * startingHealth / 3)
+        {
             healthBar[0].SetActive(false);
-        } else if (Health <= startingHealth / 3) {
+            
+
+        }
+        else if (Health <= (startingHealth * 2) / 3 && Health > startingHealth / 2)
+        {
+            healthBar[0].SetActive(false);
             healthBar[1].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 2 && Health >  startingHealth / 3)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 3 && Health > startingHealth / 6)
+        {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+
+        }
+        else if (Health <= startingHealth / 6 && Health > 0) {
+            healthBar[0].SetActive(false);
+            healthBar[1].SetActive(false);
+            healthBar[2].SetActive(false);
+            healthBar[3].SetActive(false);
+            healthBar[4].SetActive(false);
+
         }
 		base.Update (); //making sure we do Vehicle update
 		if (speedTimer <= 0) { //if speed power up has ended
@@ -102,10 +157,34 @@ public class PlayerVehicleController : VehicleDriveController {
 		Rb.AddForceAtPosition (Vector3.up * dampeningFactor * Rb.velocity.y, transform.transform.position);
 		previousSteer = correction; //getting the previous correction for use in the method
 		if (gm.Xbox_One_Controller) { //if were using a xbox controller
-			throttle = Input.GetAxis ("Drive"); //left stick Up/Down
-			correction = Input.GetAxis ("Steer"); //left stick Left/Right
-			turn = Input.GetAxis ("Turn"); //right stick Left/Right
-            if (Input.GetKey(KeyCode.JoystickButton7)) {
+            if (Input.GetAxis("Drive") > .9)
+            { //left stick Up/Down
+                throttle = 1;
+            } else if (Input.GetAxis("Drive") < -.9) {
+                throttle = -1;
+            } else {
+                throttle = 0;
+            }
+
+            if (Input.GetKey(KeyCode.JoystickButton14) || Input.GetKey(KeyCode.JoystickButton5))
+            {
+                correction = 1;
+            }
+            else if (Input.GetKey(KeyCode.JoystickButton13) || Input.GetKey(KeyCode.JoystickButton4))
+            {
+                correction = -1;
+            } else {
+                correction = 0;
+            }
+		
+            if (Input.GetAxis("Turn") > .9) {
+                turn = 1;
+            } else if (Input.GetAxis("Turn") < -.9) {
+                turn = -1;
+            } else {
+                turn = 0;
+            }
+            if (Input.GetKey(KeyCode.JoystickButton7) || Input.GetKey(KeyCode.Joystick1Button9)) {
                 gm.Pause();
             }
 		} else {
