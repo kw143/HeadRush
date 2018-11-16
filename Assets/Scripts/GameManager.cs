@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (StateManager.curState == 2)
         {
             time = 0f;
@@ -50,12 +51,13 @@ public class GameManager : MonoBehaviour {
             time = 0f;
             score = 0;
         }
-		temp = StateManager.levelStartTimer;
+		
 		UpdateScore ();
 		string[] names = Input.GetJoystickNames();
 		for (int x = 0; x < names.Length; x++)
 		{
-			if (names [x].Length == 32) {
+            temp = names[x].Length;
+            if (names [x].Length == 35) {
 				
 				//set a controller bool to true
 				Xbox_One_Controller = true;

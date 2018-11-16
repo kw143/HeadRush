@@ -31,6 +31,7 @@ public class PlayerVehicleController : VehicleDriveController {
     //how long does slow effect happen
     private float slowTimer;
     private bool ended = false;
+    public float temp;
 
     public GameObject[] healthBar;
 
@@ -102,9 +103,33 @@ public class PlayerVehicleController : VehicleDriveController {
 		Rb.AddForceAtPosition (Vector3.up * dampeningFactor * Rb.velocity.y, transform.transform.position);
 		previousSteer = correction; //getting the previous correction for use in the method
 		if (gm.Xbox_One_Controller) { //if were using a xbox controller
-			throttle = Input.GetAxis ("Drive"); //left stick Up/Down
-			correction = Input.GetAxis ("Steer"); //left stick Left/Right
-			turn = Input.GetAxis ("Turn"); //right stick Left/Right
+            if (Input.GetAxis("Drive") > .9)
+            { //left stick Up/Down
+                throttle = 1;
+            } else if (Input.GetAxis("Drive") < -.9) {
+                throttle = -1;
+            } else {
+                throttle = 0;
+            }
+            temp = Input.GetAxis("Drive");
+            if (Input.GetKey(KeyCode.JoystickButton14) || Input.GetKey(KeyCode.JoystickButton5))
+            {
+                correction = 1;
+            }
+            else if (Input.GetKey(KeyCode.JoystickButton13) || Input.GetKey(KeyCode.JoystickButton4))
+            {
+                correction = -1;
+            } else {
+                correction = 0;
+            }
+		
+            if (Input.GetAxis("Turn") > .9) {
+                turn = 1;
+            } else if (Input.GetAxis("Turn") < -.9) {
+                turn = -1;
+            } else {
+                turn = 0;
+            }
             if (Input.GetKey(KeyCode.JoystickButton7)) {
                 gm.Pause();
             }
