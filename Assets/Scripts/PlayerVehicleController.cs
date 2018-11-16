@@ -184,8 +184,11 @@ public class PlayerVehicleController : VehicleDriveController {
             } else {
                 turn = 0;
             }
-            if (Input.GetKey(KeyCode.JoystickButton7) || Input.GetKey(KeyCode.Joystick1Button9)) {
+            if ((Input.GetKey(KeyCode.JoystickButton7) || Input.GetKey(KeyCode.Joystick1Button9)) && StateManager.curState == 3) {
+
                 gm.Pause();
+               
+
             }
 		} else {
 			if (Input.GetKey (KeyCode.W)) {

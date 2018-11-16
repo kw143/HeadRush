@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public bool Xbox_One_Controller;
 	public bool test_mode = false;
+    public static bool paused = false;
 	private static float time = 0f;
 	private static int score = 0;
     private static int timerscore = 0;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	public float temp = 0;
 	public GameObject[] countDowns = new GameObject[3];
     private float maxVol = 1;
+    public Control sceneControl;
 
     public float MaxVol {
         get {
@@ -139,12 +141,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Pause() {
-        if (Time.timeScale < .5f)
+
+        if (paused)
         {
-            /*
+
             Time.timeScale = 1f;
-            Control.Unpause();
-            print("Unpause");*/
+            sceneControl.Buttonunpause();
+
         }
         else
         {
