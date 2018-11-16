@@ -1,16 +1,45 @@
 fileFormatVersion: 2
-guid: 952fb90d1ec3f924d9a43afd8f4a7f0e
+guid: 3ffb6c50219cf834b97927fcd5b94925
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: caroliny
+    100004: caroliny.001
+    100006: caroliny.002
+    100008: caroliny.003
+    100010: caroliny.004
+    100012: caroliny.005
+    100014: caroliny.006
     400000: //RootNode
-    2100000: unnamed
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane_001
-    7400000: Default Take
-    9500000: //RootNode
+    400002: caroliny
+    400004: caroliny.001
+    400006: caroliny.002
+    400008: caroliny.003
+    400010: caroliny.004
+    400012: caroliny.005
+    400014: caroliny.006
+    2300000: caroliny
+    2300002: caroliny.001
+    2300004: caroliny.002
+    2300006: caroliny.003
+    2300008: caroliny.004
+    2300010: caroliny.005
+    2300012: caroliny.006
+    3300000: caroliny
+    3300002: caroliny.001
+    3300004: caroliny.002
+    3300006: caroliny.003
+    3300008: caroliny.004
+    3300010: caroliny.005
+    3300012: caroliny.006
+    4300000: caroliny.001
+    4300002: caroliny.006
+    4300004: caroliny.005
+    4300006: caroliny.004
+    4300008: caroliny.003
+    4300010: caroliny.002
+    4300012: caroliny
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -63,13 +92,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 0
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
