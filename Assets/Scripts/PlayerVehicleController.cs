@@ -46,7 +46,7 @@ public class PlayerVehicleController : VehicleDriveController {
 
    
     // Update is called once per frame
-    new void Update()
+    void FixedUpdate()
     {
 
         if (!wallHit)
