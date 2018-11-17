@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public bool Xbox_One_Controller;
 	public bool test_mode = false;
+    public static bool paused = false;
 	private static float time = 0f;
 	private static int score = 0;
     private static int timerscore = 0;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	public float temp = 0;
 	public GameObject[] countDowns = new GameObject[3];
     private float maxVol = 1;
+    public Control sceneControl;
 
     public float MaxVol {
         get {
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (StateManager.curState == 2)
         {
             time = 0f;
@@ -50,12 +53,13 @@ public class GameManager : MonoBehaviour {
             time = 0f;
             score = 0;
         }
-		temp = StateManager.levelStartTimer;
+		
 		UpdateScore ();
 		string[] names = Input.GetJoystickNames();
 		for (int x = 0; x < names.Length; x++)
 		{
-			if (names [x].Length == 32) {
+            temp = names[x].Length;
+            if (names [x].Length == 35) {
 				
 				//set a controller bool to true
 				Xbox_One_Controller = true;
@@ -66,8 +70,15 @@ public class GameManager : MonoBehaviour {
             int minutes = ((int)time) / 60;
             int seconds = ((int)time) % 60;
             int miliseconds = ((int)(time * 100)) % 100;
-            string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
-            Timer.text = "Driver Score: " + Mathf.Ceil(timerscore - minutes * 60 - seconds).ToString();
+            if (seconds < 10)
+            {
+                string format = minutes.ToString() + ":0" + seconds.ToString() + "." + miliseconds.ToString();
+            }
+            else
+            {
+                string format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
+            }
+            Timer.text = "Driver Score: " + (Mathf.Ceil(timerscore - minutes * 60 - seconds) + (miliseconds / 100)).ToString();
             Scoreboard.text = "Gunner Score: " + score.ToString();
         }
 
@@ -100,8 +111,16 @@ public class GameManager : MonoBehaviour {
 		int minutes = ((int)time) / 60;
 		int seconds = ((int)time) % 60;
 		int miliseconds = ((int)(time * 100)) % 100;
-		string format = minutes.ToString () + ":" + seconds.ToString () + "." + miliseconds.ToString ();
-		Timer.text = format;
+        string format = "";
+        if (seconds < 10)
+        {
+            format = minutes.ToString() + ":0" + seconds.ToString() + "." + miliseconds.ToString();
+        }
+        else
+        {
+            format = minutes.ToString() + ":" + seconds.ToString() + "." + miliseconds.ToString();
+        }
+        Timer.text = format;
 	}
 	void UpdateScore(){
 		Scoreboard.text = "Score: " + score.ToString ();
@@ -122,12 +141,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Pause() {
-        if (Time.timeScale < .5f)
+
+        if (paused)
         {
-            /*
+
             Time.timeScale = 1f;
-            Control.Unpause();
-            print("Unpause");*/
+            sceneControl.Buttonunpause();
+
         }
         else
         {

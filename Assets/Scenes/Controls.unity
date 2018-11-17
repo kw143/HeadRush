@@ -178,13 +178,15 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 0.8
   m_Text: 'Gunner
 
     R Stick - Aim
 
-    RT - Aim'
+    RT - Aim
+
+    START - Pause'
 --- !u!222 &64214423
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -261,7 +263,7 @@ MonoBehaviour:
     m_LineSpacing: 0.8
   m_Text: 'R Stick- Turn
 
-    L Stick - Bank
+    LB/RB - Bank
 
     L Stick - Brake
 
@@ -273,45 +275,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 182667856}
   m_CullTransparentMesh: 0
---- !u!28 &187200354
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 1
-  m_Height: 2
-  m_CompleteImageSize: 12
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 12
-  _typelessdata: 0df2fdff0df2fdff0df2fdff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &201520496
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,11 +428,12 @@ MonoBehaviour:
   doNoise: 0
   doVerticalShift: 0
   doColorShift: 1
-  colorShiftRand: 290
+  colorShiftRand: 800
   colorShiftLerp: 0.03
-  colorShiftMin: 0.003
-  colorShiftMax: 0.05
+  colorShiftMin: 0.001
+  colorShiftMax: 0.006
   doDistortion: 0
+  startDistortion: 2000
   distortionRand: 15
   disortionMin: 0
   disortionMax: 30
@@ -611,7 +575,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 1839682304}
+  m_Texture: {fileID: 1337802708}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1105,45 +1069,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 510008422}
   m_CullTransparentMesh: 0
---- !u!28 &588685286
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 1
-  m_Height: 2
-  m_CompleteImageSize: 12
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 12
-  _typelessdata: 0065ffff0df2fdff06abfeff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &596452498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1138,7 @@ MonoBehaviour:
     m_LineSpacing: 0.8
   m_Text: 'R Stick- Turn
 
-    L Stick - Bank
+    LB/RB - Bank
 
     L Stick - Brake
 
@@ -1379,7 +1304,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 187200354}
+  m_Texture: {fileID: 1965360984}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1540,7 +1465,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 588685286}
+  m_Texture: {fileID: 1535468423}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1738,7 +1663,7 @@ GameObject:
   - component: {fileID: 1032840330}
   - component: {fileID: 1032840329}
   m_Layer: 5
-  m_Name: Controls
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,13 +1933,15 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 0.8
   m_Text: 'Gunner
 
     L/R Arrow - Aim
 
-    Up Arrow - Fire'
+    Up Arrow - Fire
+
+    ESC - Pause'
 --- !u!222 &1095801634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2087,13 +2014,15 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 0.8
   m_Text: 'Gunner
 
     R Stick - Aim
 
-    RT - Aim'
+    RT - Aim
+
+    START - Pause'
 --- !u!222 &1107912219
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2114,7 +2043,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d811ac3814eeb924fa85812125567be1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.9
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d811ac3814eeb924fa85812125567be1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2175,6 +2104,45 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d811ac3814eeb924fa85812125567be1, type: 3}
   m_IsPrefabAsset: 0
+--- !u!28 &1337802708
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 1
+  m_Height: 2
+  m_CompleteImageSize: 12
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 12
+  _typelessdata: 0065ffff0065ffff0065ffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1374812335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,6 +2332,45 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 952fb90d1ec3f924d9a43afd8f4a7f0e, type: 3}
   m_IsPrefabAsset: 0
+--- !u!28 &1535468423
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 1
+  m_Height: 2
+  m_CompleteImageSize: 12
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 12
+  _typelessdata: 0065ffff0df2fdff06abfeff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1537997935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,13 +2436,15 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 0.8
   m_Text: 'Gunner
 
     L/R Arrow - Aim
 
-    Up Arrow - Fire'
+    Up Arrow - Fire
+
+    ESC - Pause'
 --- !u!222 &1537997938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2714,45 +2723,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d811ac3814eeb924fa85812125567be1, type: 3}
   m_IsPrefabAsset: 0
---- !u!28 &1839682304
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 1
-  m_Height: 2
-  m_CompleteImageSize: 12
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 12
-  _typelessdata: 0065ffff0065ffff0065ffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1001 &1865320558
 Prefab:
   m_ObjectHideFlags: 0
@@ -2819,6 +2789,45 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 952fb90d1ec3f924d9a43afd8f4a7f0e, type: 3}
   m_IsPrefabAsset: 0
+--- !u!28 &1965360984
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 1
+  m_Height: 2
+  m_CompleteImageSize: 12
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 12
+  _typelessdata: 0df2fdff0df2fdff0df2fdff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1989806880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,7 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1032840327}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1989806883

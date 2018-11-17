@@ -41,10 +41,12 @@ public class Control: MonoBehaviour {
     }
 
     public static void Pause() {
+       
         SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
     }
 
     public static void Unpause() {
+        Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync("Pause");
     }
 
@@ -52,6 +54,8 @@ public class Control: MonoBehaviour {
 
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync("Pause");
+        GameObject.Find("Canvas").SetActive(true);
+
     }
 
     public void SettingsMenu() {

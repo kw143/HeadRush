@@ -31,7 +31,10 @@ public class BulletBehavior : MonoBehaviour {
 		if (col.gameObject.tag == "Obstacle") {
 			Destroy (col.gameObject);
 		} else if (col.gameObject.tag == "Enemy") {
-			GameManager.addScore (5);
-		}
+            this.gameObject.transform.position = new Vector3(-100000, 0, 0);
+            GameManager.addScore (5);
+        } else if (col.gameObject.tag == "Landscape") {
+            this.gameObject.transform.position = new Vector3(-100000, 0, 0);
+        }
 	}
 }

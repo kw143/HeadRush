@@ -16,7 +16,7 @@ public class Chase : EnemyVehicleController
 
     new void Death()
     {
-
+        this.GetComponent<BoxCollider>().enabled = false;
         this.GetComponent<EnemyDeath>().triggerDeath = true;
         speed = 0;
 
